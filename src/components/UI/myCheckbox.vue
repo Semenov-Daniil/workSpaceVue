@@ -24,7 +24,6 @@ export default {
     methods: {
         changeCheckbox(event) {
             this.checkbox.value = event.target.checked;
-       
         }
     }
 }
