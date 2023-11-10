@@ -25,10 +25,12 @@
 
         <div class="filter__form__item">
           <label for="city_list" class="filter__form__item__label">Город</label>
+
           <my-select
             v-model="selectSort"
             :options="selectCity"
           />
+
         </div>
 
          <div class="filter__form__item">
@@ -53,12 +55,22 @@
           </div>
         </div>
 
-        <checkbox-list
-          :checkboxData="formWork"
-        
-        />
+        <!-- <checkbox-list
+          v-model="formWork"
+        /> -->
 
-        <checkbox-list
+        <div class="filter__form__item">
+          <label for="" class="filter__form__item__label">{{ formWork.title }}</label>
+          <my-checkbox 
+              v-for="checkbox in formWork.checkboxList"
+              :key="checkbox.title"
+              :checkbox="checkbox"
+              v-model="checkbox.value"
+              :title="checkbox.title"
+          />
+        </div>
+
+        <!-- <checkbox-list
           :checkboxData="experience"
         
         />
@@ -66,7 +78,7 @@
         <checkbox-list
           :checkboxData="employment"
     
-        />
+        /> -->
 
         <div class="filter__form__operation">
           <input type="submit" class="filter__form__submit btn" value="Применить" @click="submit"/>

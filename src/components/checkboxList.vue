@@ -1,11 +1,11 @@
 <template>
     <div class="filter__form__item">
-        <label for="" class="filter__form__item__label">{{ checkboxData.title }}</label>
+        <label for="" class="filter__form__item__label">{{ modelValue.title }}</label>
         <my-checkbox 
-            v-for="checkbox in checkboxData.checkboxList"
+            v-for="(checkbox, index) in modelValue.checkboxList"
             :key="checkbox.title"
             :checkbox="checkbox"
-          
+            @update="changeCheckbox(index, $event)"
         />
     </div>
 </template>
@@ -19,15 +19,15 @@ export default {
         myCheckbox
     },
     props: {
-        checkboxData: {
+        modelValue: {
             type: Object,
             required: true,
-            default: {labelText: '', checkboxList: []}
+            default: {title: '', checkboxList: []}
         }
     },
     methods: {
-        changeCheckbox(checkbox) {
-            console.log(checkbox, this.checkboxData);
+        changeCheckbox(index, $event) {
+            this.$emit('update:modelValue', this.modelValue);
         }
     }
     

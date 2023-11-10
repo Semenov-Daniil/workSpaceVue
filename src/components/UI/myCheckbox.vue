@@ -5,10 +5,10 @@
             class="filter__form_item__checkbox" 
             name="format_office"
             id="format_office" 
-            :checked="checkbox.value"
-            @change="changeCheckbox"
+            :checked="modelValue"
+            @change="$emit('update:modelValue', $event.target.checked)"
         />
-        <label for="format_office">{{ checkbox.title }}</label>
+        <label for="format_office">{{ title }}</label>
     </div>
 </template>
 
@@ -16,14 +16,18 @@
 export default {
     name: 'my-checkbox',
     props: {
-        checkbox: {
-            type: Object,
-            default: {'title': '', 'value': false}
-        }
+        title: {
+            type: String,
+            default: "",
+        },
+        modelValue: {
+            type: Boolean,
+        },
     },
     methods: {
         changeCheckbox(event) {
             this.checkbox.value = event.target.checked;
+            this.$emit("update", this.checkbox);
         }
     }
 }
