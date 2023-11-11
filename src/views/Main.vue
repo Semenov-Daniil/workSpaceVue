@@ -41,20 +41,30 @@
               class="filter__form_item__input" 
               name="start_salary" 
               id="salary" 
-              :placeholder="`от ${minWage} ₽`"
-              v-model="minWageValue"
+              :placeholder="`от ${minWage.toLocaleString('ru-RU')} ₽`"
+
+              v-model="minWageTitle"
+              @input="this.minWageValue = $event.target.value"
+              
               @keypress="isNumber"
+
               @blur="validateMinWageValue"
+              @focus="this.minWageTitle = this.minWageValue"
             />
           <input 
             type="text" 
             class="filter__form_item__input" 
             name="end_salary" 
             id="salary" 
-            :placeholder="`до ${maxWage} ₽`"
-            v-model="maxWageValue"
+            :placeholder="`до ${maxWage.toLocaleString('ru-RU')} ₽`"
+
+            v-model="maxWageTitle"
+            @input="this.maxWageValue = $event.target.value"
+
             @keypress="isNumber"
+
             @blur="validateMaxWageValue"
+            @focus="this.maxWageTitle = this.maxWageValue"
           />
           </div>
         </div>
@@ -80,7 +90,9 @@
         </div> 
       </form>
     </aside>
-    <!-- <work-list/> -->
+    <work-list
+      :workList="workList"
+    />
   </div>
 </template>
 
@@ -104,7 +116,9 @@ export default {
       minWage: 10,
       maxWage: 1000000000,
       minWageValue: '',
+      minWageTitle: '',
       maxWageValue: '',
+      maxWageTitle: '',
 
       formWork: {
         title: "Формат",
@@ -131,7 +145,18 @@ export default {
           {title: 'Стажировка', value: false, id: 'employment_internship'},
           {title: 'Проектная работа', value: false, id: 'employment_project'},
         ],
-      }
+      },
+
+      workList: [
+        {company: 'YADRO', title: 'Инженер', wage: 1000000, employment: 'полная занятость', formWork: 'офис', experience: 'от 3-х лет'},
+        {company: 'ВкусВилл', title: 'Инженер', wage: 1000000, employment: 'полная занятость', formWork: 'офис', experience: 'от 3-х лет'},
+        {company: 'Creative People', title: 'Инженер', wage: 1000000, employment: 'полная занятость', formWork: 'офис', experience: 'от 3-х лет'},
+        {company: 'YADRO', title: 'Инженер', wage: 1000000, employment: 'полная занятость', formWork: 'офис', experience: 'от 3-х лет'},
+        {company: 'ВкусВилл', title: 'Инженер', wage: 1000000, employment: 'полная занятость', formWork: 'офис', experience: 'от 3-х лет'},
+        {company: 'Creative People', title: 'Инженер', wage: 1000000, employment: 'полная занятость', formWork: 'офис', experience: 'от 3-х лет'},
+        {company: 'YADRO', title: 'Инженер', wage: 1000000, employment: 'полная занятость', formWork: 'офис', experience: 'от 3-х лет'},
+        {company: 'ВкусВилл', title: 'Инженер', wage: 1000000, employment: 'полная занятость', formWork: 'офис', experience: 'от 3-х лет'},
+      ]
     }
   },
   methods: {
@@ -147,31 +172,20 @@ export default {
         employment: {...this.employment.checkboxList}
       })));
     },
+
     isNumber(event) {  
       let charCode = event.charCode;
       if (charCode < 48 || charCode > 57) {  
         event.preventDefault();  
       }  
     }, 
+
     reset() {
       Object.assign(this.$data, this.$options.data.call(this));
     },
-    validateMaxWageValue() {
-      if (this.maxWageValue > this.maxWage) {
-        this.maxWageValue = this.maxWage;
-      }
 
-      if (this.maxWageValue < this.minWage && this.maxWageValue !== '') {
-        this.maxWageValue = this.minWage;
-      }
-
-      if (this.maxWageValue < this.minWageValue) {
-        this.maxWageValue = this.minWageValue;
-      }
-
-      if (this.maxWageValue !== '') this.maxWageValue = Number(this.maxWageValue);
-    },
     validateMinWageValue() {
+      console.log('blur')
       if (this.minWageValue > this.maxWage) {
         this.minWageValue = this.maxWage;
       }
@@ -180,8 +194,31 @@ export default {
         this.minWageValue = 0;
       }
 
-      if (this.minWageValue !== '') this.minWageValue = Number(this.minWageValue);
-    }
+      if (this.minWageValue !== '') {   
+        this.minWageValue = Number(this.minWageValue);
+      }
+
+      if (this.minWageValue === 0) {
+        this.minWageValue = Number(this.minWageValue);
+      }
+
+      if (this.minWageValue) {
+        this.minWageTitle = 'от ' + this.minWageValue.toLocaleString('ru-RU') + ' ₽';
+      }
+    },
+
+    validateMaxWageValue() {
+      if (this.maxWageValue > this.maxWage) this.maxWageValue = this.maxWage;
+
+      if (this.maxWageValue < this.minWage && this.maxWageValue !== '') this.maxWageValue = this.minWage;
+
+      if (this.maxWageValue < this.minWageValue) this.maxWageValue = this.minWageValue;
+
+      if (this.maxWageValue !== '') this.maxWageValue = Number(this.maxWageValue);
+
+      if (this.maxWageValue) this.maxWageTitle = 'до ' + this.maxWageValue.toLocaleString('ru-RU') + ' ₽';
+    },
+
   },
   computed: {
 

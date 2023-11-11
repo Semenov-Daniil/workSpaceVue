@@ -138,6 +138,7 @@ main {
     height: 32px;
     padding-left: 16px;
     width: 135px;
+    text-overflow: ellipsis;
 }
 
 .filter__form_item__input:hover {

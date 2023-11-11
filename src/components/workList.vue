@@ -1,154 +1,24 @@
 <template>
   <section class="work-list">
-      <div class="work-list__item">
-        <img src="img/work_company/logo_company_1.png" alt="img" class="work-list__item__img" />
-        <p class="work-list__item__company">YADRO</p>
-        <p class="work-list__item__title">Инженер</p>
-        <ul class="work-list__item__info">
-          <li>от 150 000₽</li>
-          <li>полная занятость</li>
-          <li>офис</li>
-          <li>опыт от 3-х лет</li>
-        </ul>
-      </div>
-
-      <div class="work-list__item">
-        <img src="img/work_company/logo_company_1.png" alt="img" class="work-list__item__img" />
-        <p class="work-list__item__company">YADRO</p>
-        <p class="work-list__item__title">Инженер</p>
-        <ul class="work-list__item__info">
-          <li>от 150 000₽</li>
-          <li>полная занятость</li>
-          <li>офис</li>
-          <li>опыт от 3-х лет</li>
-        </ul>
-      </div>
-
-      <div class="work-list__item">
-        <img src="img/work_company/logo_company_1.png" alt="img" class="work-list__item__img" />
-        <p class="work-list__item__company">YADRO</p>
-        <p class="work-list__item__title">Инженер</p>
-        <ul class="work-list__item__info">
-          <li>от 150 000₽</li>
-          <li>полная занятость</li>
-          <li>офис</li>
-          <li>опыт от 3-х лет</li>
-        </ul>
-      </div>
-
-      <div class="work-list__item">
-        <img src="img/work_company/logo_company_1.png" alt="img" class="work-list__item__img" />
-        <p class="work-list__item__company">YADRO</p>
-        <p class="work-list__item__title">Инженер</p>
-        <ul class="work-list__item__info">
-          <li>от 150 000₽</li>
-          <li>полная занятость</li>
-          <li>офис</li>
-          <li>опыт от 3-х лет</li>
-        </ul>
-      </div>
-
-      <div class="work-list__item">
-        <img src="img/work_company/logo_company_1.png" alt="img" class="work-list__item__img" />
-        <p class="work-list__item__company">YADRO</p>
-        <p class="work-list__item__title">Инженер</p>
-        <ul class="work-list__item__info">
-          <li>от 150 000₽</li>
-          <li>полная занятость</li>
-          <li>офис</li>
-          <li>опыт от 3-х лет</li>
-        </ul>
-      </div>
-
-      <div class="work-list__item">
-        <img src="img/work_company/logo_company_1.png" alt="img" class="work-list__item__img" />
-        <p class="work-list__item__company">YADRO</p>
-        <p class="work-list__item__title">Инженер</p>
-        <ul class="work-list__item__info">
-          <li>от 150 000₽</li>
-          <li>полная занятость</li>
-          <li>офис</li>
-          <li>опыт от 3-х лет</li>
-        </ul>
-      </div>
-
-      <div class="work-list__item">
-        <img src="img/work_company/logo_company_1.png" alt="img" class="work-list__item__img" />
-        <p class="work-list__item__company">YADRO</p>
-        <p class="work-list__item__title">Инженер</p>
-        <ul class="work-list__item__info">
-          <li>от 150 000₽</li>
-          <li>полная занятость</li>
-          <li>офис</li>
-          <li>опыт от 3-х лет</li>
-        </ul>
-      </div>
-
-      <div class="work-list__item">
-        <img src="img/work_company/logo_company_1.png" alt="img" class="work-list__item__img" />
-        <p class="work-list__item__company">YADRO</p>
-        <p class="work-list__item__title">Инженер</p>
-        <ul class="work-list__item__info">
-          <li>от 150 000₽</li>
-          <li>полная занятость</li>
-          <li>офис</li>
-          <li>опыт от 3-х лет</li>
-        </ul>
-      </div>
-
-      <div class="work-list__item">
-        <img src="img/work_company/logo_company_1.png" alt="img" class="work-list__item__img" />
-        <p class="work-list__item__company">YADRO</p>
-        <p class="work-list__item__title">Инженер</p>
-        <ul class="work-list__item__info">
-          <li>от 150 000₽</li>
-          <li>полная занятость</li>
-          <li>офис</li>
-          <li>опыт от 3-х лет</li>
-        </ul>
-      </div>
-
-      <div class="work-list__item">
-        <img src="img/work_company/logo_company_1.png" alt="img" class="work-list__item__img" />
-        <p class="work-list__item__company">YADRO</p>
-        <p class="work-list__item__title">Инженер</p>
-        <ul class="work-list__item__info">
-          <li>от 150 000₽</li>
-          <li>полная занятость</li>
-          <li>офис</li>
-          <li>опыт от 3-х лет</li>
-        </ul>
-      </div>
-
-      <div class="work-list__item">
-        <img src="img/work_company/logo_company_1.png" alt="img" class="work-list__item__img" />
-        <p class="work-list__item__company">YADRO</p>
-        <p class="work-list__item__title">Инженер</p>
-        <ul class="work-list__item__info">
-          <li>от 150 000₽</li>
-          <li>полная занятость</li>
-          <li>офис</li>
-          <li>опыт от 3-х лет</li>
-        </ul>
-      </div>
-
-      <div class="work-list__item">
-        <img src="img/work_company/logo_company_1.png" alt="img" class="work-list__item__img" />
-        <p class="work-list__item__company">YADRO</p>
-        <p class="work-list__item__title">Инженер</p>
-        <ul class="work-list__item__info">
-          <li>от 150 000₽</li>
-          <li>полная занятость</li>
-          <li>офис</li>
-          <li>опыт от 3-х лет</li>
-        </ul>
-      </div>
-    </section>
+    <work-item 
+      v-for="(workItem, index) in workList"
+      :key="index"
+      :workCard="workItem"
+    />    
+  </section>
 </template>
 
 <script>
-export default {
+import workItem from './workItem.vue';
 
+export default {
+  components: { workItem },
+  props: {
+    workList: {
+      type: Array,
+      required: true,
+    }
+  }
 }
 </script>
 
