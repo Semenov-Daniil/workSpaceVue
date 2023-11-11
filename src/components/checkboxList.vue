@@ -1,11 +1,13 @@
 <template>
     <div class="filter__form__item">
-        <label for="" class="filter__form__item__label">{{ modelValue.title }}</label>
+        <label for="" class="filter__form__item__label">{{ title }}</label>
         <my-checkbox 
-            v-for="(checkbox, index) in modelValue.checkboxList"
-            :key="checkbox.title"
-            :checkbox="checkbox"
-            @update="changeCheckbox(index, $event)"
+            v-for="(checkbox, index) in checkboxList"
+            :key="index"
+            v-model:value="checkbox.value"
+            :title="checkbox.title"
+            :id="checkbox.id"
+            @change="$emit('update:checkboxList', JSON.parse(JSON.stringify(checkboxList)))"
         />
     </div>
 </template>
@@ -19,18 +21,19 @@ export default {
         myCheckbox
     },
     props: {
-        modelValue: {
-            type: Object,
+        checkboxList: {
+            type: Array,
             required: true,
-            default: {title: '', checkboxList: []}
+            default: () => []
+        },
+        title: {
+            type: String, Number,
+            default: ''
         }
-    },
+    }, 
     methods: {
-        changeCheckbox(index, $event) {
-            this.$emit('update:modelValue', this.modelValue);
-        }
-    }
-    
+
+    },
 }
 </script>
 

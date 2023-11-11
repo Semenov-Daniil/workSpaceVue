@@ -3,12 +3,11 @@
         <input 
             type="checkbox" 
             class="filter__form_item__checkbox" 
-            name="format_office"
-            id="format_office" 
-            :checked="modelValue"
-            @change="$emit('update:modelValue', $event.target.checked)"
+            :id="id" 
+            :checked="value"
+            @change="$emit('update:value', $event.target.checked)"
         />
-        <label for="format_office">{{ title }}</label>
+        <label :for="id">{{ title }}</label>
     </div>
 </template>
 
@@ -20,16 +19,15 @@ export default {
             type: String,
             default: "",
         },
-        modelValue: {
+        value: {
             type: Boolean,
+            default: false
         },
-    },
-    methods: {
-        changeCheckbox(event) {
-            this.checkbox.value = event.target.checked;
-            this.$emit("update", this.checkbox);
+        id: {
+            type: String, Number,
+            default: "",
         }
-    }
+    },
 }
 </script>
 

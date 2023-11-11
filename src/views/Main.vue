@@ -19,8 +19,8 @@
       <form action="#" method="get" class="filter__form" @submit.prevent>
         <div class="filter__form__title">
           <p class="filter__form__title__text">Фильтр</p>
-
-          <input type="reset" value="Очистить" class="filter__form__reset" />
+          <!-- <input type="reset" value="Очистить" class="filter__form__reset" /> -->
+          <button class="filter__form__reset" @click="reset">Очистить</button>
         </div>
 
         <div class="filter__form__item">
@@ -41,44 +41,38 @@
               class="filter__form_item__input" 
               name="start_salary" 
               id="salary" 
-              placeholder="от" 
-              v-model="minWage"
+              :placeholder="`от ${minWage} ₽`"
+              v-model="minWageValue"
+              @keypress="isNumber"
+              @blur="validateMinWageValue"
             />
           <input 
             type="text" 
             class="filter__form_item__input" 
             name="end_salary" 
             id="salary" 
-            placeholder="до" 
-            v-model="maxWage"
+            :placeholder="`до ${maxWage} ₽`"
+            v-model="maxWageValue"
+            @keypress="isNumber"
+            @blur="validateMaxWageValue"
           />
           </div>
         </div>
 
-        <!-- <checkbox-list
-          v-model="formWork"
-        /> -->
-
-        <div class="filter__form__item">
-          <label for="" class="filter__form__item__label">{{ formWork.title }}</label>
-          <my-checkbox 
-              v-for="checkbox in formWork.checkboxList"
-              :key="checkbox.title"
-              :checkbox="checkbox"
-              v-model="checkbox.value"
-              :title="checkbox.title"
-          />
-        </div>
-
-        <!-- <checkbox-list
-          :checkboxData="experience"
-        
+        <checkbox-list
+          :title="formWork.title"
+          v-model:checkboxList="formWork.checkboxList"
         />
 
         <checkbox-list
-          :checkboxData="employment"
-    
-        /> -->
+          :title="experience.title"
+          v-model:checkboxList="experience.checkboxList"
+        />
+
+        <checkbox-list
+          :title="employment.title"
+          v-model:checkboxList="employment.checkboxList"
+        />
 
         <div class="filter__form__operation">
           <input type="submit" class="filter__form__submit btn" value="Применить" @click="submit"/>
@@ -106,40 +100,94 @@ export default {
         {value: "Moscow", name: "Москва"},
       ],
       selectSort: "",
-      minWage: '',
-      maxWage: "",
+
+      minWage: 10,
+      maxWage: 1000000000,
+      minWageValue: '',
+      maxWageValue: '',
+
       formWork: {
         title: "Формат",
         checkboxList: [
-          {title: 'Офис', value: false},
-          {title: 'Удаленный', value: false},
-          {title: 'Гибкий', value: false},
-        ]
+          {title: 'Офис', value: false, id: 'format_office'},
+          {title: 'Удаленный', value: false, id: 'format_remote'},
+          {title: 'Гибкий', value: false, id: 'format_flexible'},
+        ],
       },
       experience: {
         title: "Опыт работы",
         checkboxList: [
-          {title: 'Не важно', value: false},
-          {title: 'Без опыта', value: false},
-          {title: 'От 1 года до 3-х лет', value: false},
-          {title: 'От 3-х лет', value: false},
-        ]
+          {title: 'Не важно', value: false, id: 'experience_not-important'},
+          {title: 'Без опыта', value: false, id: 'experience_whithout'},
+          {title: 'От 1 года до 3-х лет', value: false, id: 'experience_from-one-to-three'},
+          {title: 'От 3-х лет', value: false, id: 'experience_to-three'},
+        ],
       },
       employment: {
         title: "Занятость",
         checkboxList: [
-          {title: 'Полная', value: false},
-          {title: 'Частичная', value: false},
-          {title: 'Стажировка', value: false},
-          {title: 'Проектная работа', value: false},
-        ] 
+          {title: 'Полная', value: false, id: 'employment_full'},
+          {title: 'Частичная', value: false, id: 'employment_partially'},
+          {title: 'Стажировка', value: false, id: 'employment_internship'},
+          {title: 'Проектная работа', value: false, id: 'employment_project'},
+        ],
       }
     }
   },
   methods: {
     submit() {
-      console.log(this.selectSort, this.formWork.checkboxList, this.experience.checkboxList, this.employment.checkboxList);
+      console.log(JSON.parse(JSON.stringify({
+        selectSort: this.selectSort,
+        wage: {
+          minWageValue: this.minWageValue,
+          maxWageValue: this.maxWageValue,
+        },
+        formWork: {...this.formWork.checkboxList},
+        experience: {...this.experience.checkboxList},
+        employment: {...this.employment.checkboxList}
+      })));
+    },
+    isNumber(event) {  
+      let charCode = event.charCode;
+      if (charCode < 48 || charCode > 57) {  
+        event.preventDefault();  
+      }  
+    }, 
+    reset() {
+      Object.assign(this.$data, this.$options.data.call(this));
+    },
+    validateMaxWageValue() {
+      if (this.maxWageValue > this.maxWage) {
+        this.maxWageValue = this.maxWage;
+      }
+
+      if (this.maxWageValue < this.minWage && this.maxWageValue !== '') {
+        this.maxWageValue = this.minWage;
+      }
+
+      if (this.maxWageValue < this.minWageValue) {
+        this.maxWageValue = this.minWageValue;
+      }
+
+      if (this.maxWageValue !== '') this.maxWageValue = Number(this.maxWageValue);
+    },
+    validateMinWageValue() {
+      if (this.minWageValue > this.maxWage) {
+        this.minWageValue = this.maxWage;
+      }
+
+      if (this.minWageValue < 0) {
+        this.minWageValue = 0;
+      }
+
+      if (this.minWageValue !== '') this.minWageValue = Number(this.minWageValue);
     }
+  },
+  computed: {
+
+  },
+  watch: {
+
   }
 }
 </script>
