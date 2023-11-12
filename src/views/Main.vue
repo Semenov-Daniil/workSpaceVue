@@ -4,8 +4,9 @@
       Найди работу<br />
       <span>Своей мечты</span>
     </h1>
-
-    <img src="img/site/slogan_img.png" alt="img" class="slogan__img" />
+    <div class="container__image">
+      <img src="img/site/slogan_img.png" alt="img" class="slogan__img" />
+    </div>
   </section>
 
   <div class="main_content container">
@@ -202,7 +203,7 @@ export default {
         this.minWageValue = Number(this.minWageValue);
       }
 
-      if (this.minWageValue) {
+      if (this.minWageValue !== '') {
         this.minWageTitle = 'от ' + this.minWageValue.toLocaleString('ru-RU') + ' ₽';
       }
     },

@@ -1,5 +1,5 @@
 <template>
-    <div class="work-list__item">
+    <div class="work-list__item" style="cursor: pointer;">
         <img 
             :src="getLogoCompany(workCard.company)" 
             :alt="workCard.company" 

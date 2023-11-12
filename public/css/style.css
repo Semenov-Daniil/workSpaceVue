@@ -61,7 +61,7 @@ header {
     height: 48px;
     text-decoration: none;
     background-color: #A6ADFF;
-    padding: 12px 32px;
+    padding: 10px 30px;
     border-radius: 8px;
 }
 
@@ -136,9 +136,10 @@ main {
     border: none;
     background-color: #fff;
     height: 32px;
-    padding-left: 16px;
+    padding-left: 15px;
     width: 135px;
     text-overflow: ellipsis;
+    border: 1px solid transparent;
 }
 
 .filter__form_item__input:hover {
@@ -173,13 +174,47 @@ main {
 .filter__form_item__checkbox {
     height: 20px;
     width: 20px;
+
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.filter__form_item__checkbox+label {
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+}
+
+.filter__form_item__checkbox+label::before {
+    content: '';
+    display: inline-block;
+    flex-shrink: 0;
+    flex-grow: 0;
+    width: 20px;
+    height: 20px;   
+    border-radius: 4px;
+    background: #FFF;
+    margin-right: 8px;  
+}
+
+.filter__form_item__checkbox:checked+label::before {
+    display: flex;
+    padding: 2px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    background-image: url('../img/icons/uim_check.svg');
+    background-repeat:no-repeat;
+    background-position: center center;
 }
 
 .filter__form__submit {
     border: none;
     border-radius: 4px;
     background-color: #A6ADFF;
-    padding: 8px 24px;
+    padding: 6px 22px;
     width: 125px;
     height: 32px;
 }
@@ -199,7 +234,8 @@ main {
     font-size: 14px;
     display: flex;
     flex-direction: column;
-    padding: 16px;
+    padding: 14px;
+    border: 2px solid transparent;
 }
 
 .work-list__item:hover {
@@ -294,7 +330,7 @@ footer {
 
 
 
-/* ВСПОМОГАТЕЛЬНЫЕ КЛАССЫЕ */
+/* ВСПОМОГАТЕЛЬНЫЕ КЛАССЫ */
 .no-show {
     display: none;
 }
@@ -307,6 +343,7 @@ footer {
 .btn {
     box-sizing: border-box;
     transition: .2s;
+    border: 2px solid transparent;
 }
 
 .btn:hover {
