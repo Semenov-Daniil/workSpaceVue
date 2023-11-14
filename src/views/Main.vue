@@ -93,7 +93,37 @@
     </aside>
     <work-list
       :workList="workList"
+      @popup="console.log($event)"
     />
+    <section class="popup no-show">
+      <div class="popup__title">
+        <img src="img/work_company/logo_company_3.png" alt="img" class="popup__title__img" />
+        <div class="popup__title__info">
+          <p>Creative People</p>
+          <span>Графический дизайнер</span>
+        </div>
+      </div>
+      <div class="popup__info">
+        Привет. Мы в CreativePeople ищем middle графического дизайнера в свою
+        дизайн команду. Удаленно, из любой точки нашей страны, где у вас будет
+        хороший интернет. Опыт работы в разработке логотипов, фирменных стилей
+        обязателен.<br />
+        У нас в портфолио много крупных российских компаний, с некоторыми
+        мы работаем уже много лет и делаем самые разные проекты, от сайтов
+        до мобильных приложений.
+      </div>
+      <div class="popup__tags">
+        <span class="popup__tags__item"> от 110 000₽ </span>
+        <span class="popup__tags__item"> проектная работа </span>
+        <span class="popup__tags__item"> удаленный </span>
+        <span class="popup__tags__item"> опыт от 1 года до 3-х лет </span>
+        <span class="popup__tags__item"> Москва </span>
+      </div>
+      <div class="popup__link">
+        Отправляйте резюме на
+        <a href="mailto:CreativePeople@gmail.com">CreativePeople@gmail.com</a>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -108,10 +138,7 @@ export default {
   },
   data() {
     return {
-      selectCity: [
-        {value: "Saint-Petersburg", name: "Санкт-Петербург"},
-        {value: "Moscow", name: "Москва"},
-      ],
+      selectCity: [],
       selectSort: "",
 
       minWage: 10,
@@ -148,16 +175,9 @@ export default {
         ],
       },
 
-      workList: [
-        {company: 'YADRO', title: 'Инженер', wage: 1000000, employment: 'полная занятость', formWork: 'офис', experience: 'от 3-х лет'},
-        {company: 'ВкусВилл', title: 'Инженер', wage: 1000000, employment: 'полная занятость', formWork: 'офис', experience: 'от 3-х лет'},
-        {company: 'Creative People', title: 'Инженер', wage: 1000000, employment: 'полная занятость', formWork: 'офис', experience: 'от 3-х лет'},
-        {company: 'YADRO', title: 'Инженер', wage: 1000000, employment: 'полная занятость', formWork: 'офис', experience: 'от 3-х лет'},
-        {company: 'ВкусВилл', title: 'Инженер', wage: 1000000, employment: 'полная занятость', formWork: 'офис', experience: 'от 3-х лет'},
-        {company: 'Creative People', title: 'Инженер', wage: 1000000, employment: 'полная занятость', formWork: 'офис', experience: 'от 3-х лет'},
-        {company: 'YADRO', title: 'Инженер', wage: 1000000, employment: 'полная занятость', formWork: 'офис', experience: 'от 3-х лет'},
-        {company: 'ВкусВилл', title: 'Инженер', wage: 1000000, employment: 'полная занятость', formWork: 'офис', experience: 'от 3-х лет'},
-      ]
+      workList: [],
+
+      homeUrl: 'https://workspace-methed.vercel.app/',
     }
   },
   methods: {
@@ -183,10 +203,11 @@ export default {
 
     reset() {
       Object.assign(this.$data, this.$options.data.call(this));
+      this.featchCity();
+      this.featchVacancy();
     },
 
     validateMinWageValue() {
-      console.log('blur')
       if (this.minWageValue > this.maxWage) {
         this.minWageValue = this.maxWage;
       }
@@ -220,12 +241,34 @@ export default {
       if (this.maxWageValue) this.maxWageTitle = 'до ' + this.maxWageValue.toLocaleString('ru-RU') + ' ₽';
     },
 
+    async featchCity() {
+      try {
+        let response = await fetch('https://workspace-methed.vercel.app/api/locations');
+        this.selectCity = await response.json();
+      } catch(err) {
+        alert(err);
+      }
+    },
+
+    async featchVacancy() {
+      try {
+        let response = await fetch('https://workspace-methed.vercel.app/api/vacancy');
+        this.workList = (await response.json()).vacancies;
+        // console.log(await response.json());
+      } catch(err) {
+        alert(err);
+      }
+    }
   },
   computed: {
 
   },
   watch: {
 
+  },
+  mounted() {
+    this.featchCity();
+    this.featchVacancy();
   }
 }
 </script>

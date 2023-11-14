@@ -29,6 +29,10 @@ body {
     width: 1180px;
 }
 
+a {
+    display: block;
+}
+
 
 /* HEADER START */
 header {
@@ -248,9 +252,9 @@ main {
 }
 
 .work-list__item__img {
-    width: 44px;
     height: 44px;
     margin-bottom: 12px;
+    align-self: flex-start;
 }
 
 .work-list__item__company {

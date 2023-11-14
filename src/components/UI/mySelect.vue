@@ -9,11 +9,11 @@
   >
     <option disabled value="">Выбрать город</option>
     <option
-      v-for="option in options"
-      :key="option.value"
-      :value="option.value"
+      v-for="(option, index) in options"
+      :key="index"
+      :value="option"
     >
-      {{ option.name }}
+      {{ option }}
     </option>
   </select>
 </template>

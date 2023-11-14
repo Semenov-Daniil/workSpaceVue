@@ -4,6 +4,7 @@
       v-for="(workItem, index) in workList"
       :key="index"
       :workCard="workItem"
+      @popup="$emit('popup', $event)"
     />    
   </section>
 </template>
