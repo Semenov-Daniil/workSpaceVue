@@ -7,7 +7,7 @@
     :value="modelValue"
     @change="changeOption"
   >
-    <option disabled value="">Выбрать город</option>
+    <option value="">Выбрать город</option>
     <option
       v-for="(option, index) in options"
       :key="index"

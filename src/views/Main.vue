@@ -11,85 +11,100 @@
 
   <div class="main_content container">
     <aside class="filter">
-      <p class="filter__link__mobile no-show">
-        Фильтр
-        <svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M4 6L8 0H0L4 6Z" fill="#2A18FF" />
-        </svg>
-      </p>
-      <form action="#" method="get" class="filter__form" @submit.prevent>
-        <div class="filter__form__title">
-          <p class="filter__form__title__text">Фильтр</p>
-          <!-- <input type="reset" value="Очистить" class="filter__form__reset" /> -->
-          <button class="filter__form__reset" @click="reset">Очистить</button>
-        </div>
+      <div class="filter__form__title" @click="filterShow = !filterShow">
+          <div class="wrap__filter__title">
+            <p class="filter__form__title__text">
+              Фильтр
+            </p>
+            <div class="wrap-filter-arrow">
+              <svg :class="{'filter__svg':true, 'reversed':filterShow}" width="8" height="6" viewBox="0 0 8 6" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 6L8 0H0L4 6Z" fill="#2A18FF" />
+              </svg>
+            </div>
+          </div>
+          <input type="reset" value="Очистить" class="filter__form__reset form-title__reset" />
+          <!-- <button class="filter__form__reset" @click="reset">Очистить</button> -->
+      </div>
 
-        <div class="filter__form__item">
-          <label for="city_list" class="filter__form__item__label">Город</label>
-
-          <my-select
-            v-model="selectSort"
-            :options="selectCity"
-          />
-
-        </div>
-
-         <div class="filter__form__item">
-          <label for="salary" class="filter__form__item__label">Заработная плата</label>
-          <div class="filter__form_item__salary">
+      <transition name="form-fade">
+        <form 
+          action="#" 
+          method="get" 
+          class="filter__form"
+          @submit.prevent
+          v-show="filterShow"
+        >
+          
+  
+          <div class="filter__form__item">
+            <label for="city_list" class="filter__form__item__label">Город</label>
+  
+            <my-select
+              v-model="selectSort"
+              :options="selectCity"
+            />
+  
+          </div>
+  
+           <div class="filter__form__item">
+            <label for="salary" class="filter__form__item__label">Заработная плата</label>
+            <div class="filter__form_item__salary">
+              <input 
+                type="text" 
+                class="filter__form_item__input" 
+                name="start_salary" 
+                id="salary" 
+                :placeholder="`от ${minWage.toLocaleString('ru-RU')} ₽`"
+  
+                v-model="minWageTitle"
+                @input="this.minWageValue = $event.target.value"
+                
+                @keypress="isNumber"
+  
+                @blur="validateMinWageValue"
+                @focus="this.minWageTitle = this.minWageValue"
+              />
             <input 
               type="text" 
               class="filter__form_item__input" 
-              name="start_salary" 
+              name="end_salary" 
               id="salary" 
-              :placeholder="`от ${minWage.toLocaleString('ru-RU')} ₽`"
-
-              v-model="minWageTitle"
-              @input="this.minWageValue = $event.target.value"
-              
+              :placeholder="`до ${maxWage.toLocaleString('ru-RU')} ₽`"
+  
+              v-model="maxWageTitle"
+              @input="this.maxWageValue = $event.target.value"
+  
               @keypress="isNumber"
-
-              @blur="validateMinWageValue"
-              @focus="this.minWageTitle = this.minWageValue"
+  
+              @blur="validateMaxWageValue"
+              @focus="this.maxWageTitle = this.maxWageValue"
             />
-          <input 
-            type="text" 
-            class="filter__form_item__input" 
-            name="end_salary" 
-            id="salary" 
-            :placeholder="`до ${maxWage.toLocaleString('ru-RU')} ₽`"
-
-            v-model="maxWageTitle"
-            @input="this.maxWageValue = $event.target.value"
-
-            @keypress="isNumber"
-
-            @blur="validateMaxWageValue"
-            @focus="this.maxWageTitle = this.maxWageValue"
-          />
+            </div>
           </div>
-        </div>
-
-        <checkbox-list
-          :title="formWork.title"
-          v-model:checkboxList="formWork.checkboxList"
-        />
-
-        <checkbox-list
-          :title="experience.title"
-          v-model:checkboxList="experience.checkboxList"
-        />
-
-        <checkbox-list
-          :title="employment.title"
-          v-model:checkboxList="employment.checkboxList"
-        />
-
-        <div class="filter__form__operation">
-          <input type="submit" class="filter__form__submit btn" value="Применить" @click="submit"/>
-          <input type="reset" class="filter__form__reset no-show" value="Очистить" />
-        </div> 
-      </form>
+  
+          <div class="wrap__filter__item">
+            <checkbox-list
+              :title="formWork.title"
+              v-model:checkboxList="formWork.checkboxList"
+            />
+    
+            <checkbox-list
+              :title="experience.title"
+              v-model:checkboxList="experience.checkboxList"
+            />
+    
+            <checkbox-list
+              :title="employment.title"
+              v-model:checkboxList="employment.checkboxList"
+            />
+          </div>
+  
+          <div class="filter__form__operation">
+            <input type="submit" class="filter__form__submit btn" value="Применить" @click="submit"/>
+            <input type="reset" class="filter__form__reset form__operation__reset" value="Очистить" />
+          </div> 
+        </form>
+      </transition>
     </aside>
     <work-list
       :workList="workList"
@@ -178,6 +193,8 @@ export default {
       workList: [],
 
       homeUrl: 'https://workspace-methed.vercel.app/',
+
+      filterShow: true,
     }
   },
   methods: {
@@ -274,5 +291,14 @@ export default {
 </script>
 
 <style>
+  .form-fade-enter-active,
+  .form-fade-leave-active {
+    transition: all 0.3s linear;
+  }
 
+  .form-fade-enter-from,
+  .form-fade-leave-to {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
 </style>
