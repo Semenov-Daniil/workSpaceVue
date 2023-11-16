@@ -11,8 +11,8 @@
 
   <div class="main_content container">
     <aside class="filter">
-      <div class="filter__form__title" @click="filterShow = !filterShow">
-          <div class="wrap__filter__title">
+      <div class="filter__form__title">
+          <div class="wrap__filter__title" @click="filterShow = !filterShow">
             <p class="filter__form__title__text">
               Фильтр
             </p>
@@ -22,7 +22,7 @@
               </svg>
             </div>
           </div>
-          <input type="reset" value="Очистить" class="filter__form__reset form-title__reset" />
+          <input form="filter__form" type="reset" value="Очистить" class="filter__form__reset form-title__reset" />
           <!-- <button class="filter__form__reset" @click="reset">Очистить</button> -->
       </div>
 
@@ -31,6 +31,7 @@
           action="#" 
           method="get" 
           class="filter__form"
+          id="filter__form"
           @submit.prevent
           v-show="filterShow"
         >
@@ -47,7 +48,7 @@
           </div>
   
            <div class="filter__form__item">
-            <label for="salary" class="filter__form__item__label">Заработная плата</label>
+            <label for="" class="filter__form__item__label">Заработная плата</label>
             <div class="filter__form_item__salary">
               <input 
                 type="text" 
@@ -110,35 +111,37 @@
       :workList="workList"
       @popup="console.log($event)"
     />
-    <section class="popup no-show">
-      <div class="popup__title">
-        <img src="img/work_company/logo_company_3.png" alt="img" class="popup__title__img" />
-        <div class="popup__title__info">
-          <p>Creative People</p>
-          <span>Графический дизайнер</span>
+    <div class="wrapper__popup">
+      <div class="popup">
+        <div class="popup__title">
+          <img src="img/work_company/logo_company_3.png" alt="img" class="popup__title__img" />
+          <div class="popup__title__info">
+            <p>Creative People</p>
+            <span>Графический дизайнер</span>
+          </div>
+        </div>
+        <div class="popup__info">
+          Привет. Мы в CreativePeople ищем middle графического дизайнера в свою
+          дизайн команду. Удаленно, из любой точки нашей страны, где у вас будет
+          хороший интернет. Опыт работы в разработке логотипов, фирменных стилей
+          обязателен.<br />
+          У нас в портфолио много крупных российских компаний, с некоторыми
+          мы работаем уже много лет и делаем самые разные проекты, от сайтов
+          до мобильных приложений.
+        </div>
+        <div class="popup__tags">
+          <span class="popup__tags__item"> от 110 000₽ </span>
+          <span class="popup__tags__item"> проектная работа </span>
+          <span class="popup__tags__item"> удаленный </span>
+          <span class="popup__tags__item"> опыт от 1 года до 3-х лет </span>
+          <span class="popup__tags__item"> Москва </span>
+        </div>
+        <div class="popup__link">
+          Отправляйте резюме на
+          <a href="mailto:CreativePeople@gmail.com">CreativePeople@gmail.com</a>
         </div>
       </div>
-      <div class="popup__info">
-        Привет. Мы в CreativePeople ищем middle графического дизайнера в свою
-        дизайн команду. Удаленно, из любой точки нашей страны, где у вас будет
-        хороший интернет. Опыт работы в разработке логотипов, фирменных стилей
-        обязателен.<br />
-        У нас в портфолио много крупных российских компаний, с некоторыми
-        мы работаем уже много лет и делаем самые разные проекты, от сайтов
-        до мобильных приложений.
-      </div>
-      <div class="popup__tags">
-        <span class="popup__tags__item"> от 110 000₽ </span>
-        <span class="popup__tags__item"> проектная работа </span>
-        <span class="popup__tags__item"> удаленный </span>
-        <span class="popup__tags__item"> опыт от 1 года до 3-х лет </span>
-        <span class="popup__tags__item"> Москва </span>
-      </div>
-      <div class="popup__link">
-        Отправляйте резюме на
-        <a href="mailto:CreativePeople@gmail.com">CreativePeople@gmail.com</a>
-      </div>
-    </section>
+    </div>
   </div>
 </template>
 

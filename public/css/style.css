@@ -372,6 +372,17 @@ footer {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    background-color: #FFFFFF;
+}
+
+.wrapper__popup {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    left: 0;
+    top: 0;
+    z-index: 100;
 }
 
 /* POPUP END */
