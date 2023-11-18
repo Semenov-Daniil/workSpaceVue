@@ -12,7 +12,7 @@
   <div class="main_content container">
     <aside class="filter">
       <div class="filter__form__title">
-          <div class="wrap__filter__title" @click="filterShow = !filterShow">
+          <div class="wrap__filter__title" @click="openCloseFilter">
             <p class="filter__form__title__text">
               Фильтр
             </p>
@@ -33,7 +33,7 @@
           class="filter__form"
           id="filter__form"
           @submit.prevent
-          v-show="filterShow"
+          v-show="showFilter()"
         >
           
   
@@ -202,12 +202,12 @@ export default {
 
       workList: [],
 
-      homeUrl: 'https://workspace-methed.vercel.app/',
-
-      filterShow: true,
+      filterShow: false,
       companyShow: false,
 
       company: {},
+
+      width: 1600,
     }
   },
   methods: {
@@ -303,7 +303,29 @@ export default {
     closePopup() {
       this.company = {};
       this.companyShow = false;
+    },
+
+    openCloseFilter() {
+      if (this.width < 1024) {
+        this.filterShow = !this.filterShow;
+        
+      }
+    },
+
+    showFilter() {
+      if (this.width < 1024) {
+        console.log(this.filterShow)
+        return this.filterShow;
+      } else {
+        return true;
+      }
     }
+  },
+  created() {
+    window.addEventListener("resize", () => { this.width = document.documentElement.clientWidth; });
+  },
+  destroyed() {
+    window.removeEventListener("resize", () => { this.width = document.documentElement.clientWidth; });
   },
   computed: {
 
