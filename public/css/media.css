@@ -119,6 +119,11 @@
     .form__operation__reset {
         display: block;
     }
+
+    .popup {
+        width: 680px;
+        padding: 24px;
+    }
 }
 
 @media only screen and (max-width: 768px) {
@@ -167,5 +172,42 @@
     .footer_content__dev-info {
         align-self: flex-start;
         line-height: 2;
+    }
+
+    .popup {
+        width: 290px;
+        height: fit-content;
+        gap: 24px
+    }
+
+    .likemen {
+        display: none;
+    }
+
+    .popup__title {
+        gap: 8px;
+    }
+
+    .popup__title__info {
+        gap: 4px;
+    }
+
+    .popup__title img {
+        height: 60px;
+    }
+
+    .popup__title__company {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .popup__title__vacancy {
+        font-size: 12px;
+        line-height: 14.4px;
+    }
+
+    .popup__info {
+        flex-direction: column;
+        gap: 24px;
     }
 }

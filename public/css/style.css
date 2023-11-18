@@ -31,6 +31,11 @@ body {
 
 a {
     display: block;
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
 }
 
 
@@ -367,14 +372,6 @@ footer {
 
 
 /* POPUP START */
-.popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #FFFFFF;
-}
-
 .wrapper__popup {
     position: fixed;
     width: 100vw;
@@ -383,8 +380,116 @@ footer {
     left: 0;
     top: 0;
     z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+.popup {
+    position: absolute;
+    margin: auto;
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 780px;
+    height: fit-content;
+    min-height: 450px;
+}
+
+.popup__title {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.popup__title img {
+    height: 101px;
+}
+
+.popup__title__info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.popup__title__company {
+    font-size: 32px;
+    line-height: 38.4px;
+}
+
+.popup__title__vacancy {
+    padding: 5px 10px;
+    background-color: #EAECFF;
+    border-radius: 4px;
+    font-size: 20px;
+    line-height: 24px;
+    width: fit-content;
+}
+
+.popup__info {
+    display: flex;
+    gap: 20px;
+}
+
+.popup__info__desc {
+    font-size: 14px;
+    line-height: 19.6px;
+}
+
+.popup__tags {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.popup__tags__item {
+    font-size: 14px;
+    line-height: 16.8px;
+    padding: 3px 10px;
+    background-color: #EAECFF;
+    border-radius: 30px;
+    white-space: nowrap;
+    width: fit-content;
+}
+
+.popup__link {
+    font-size: 14px;
+    line-height: 19.6px;
+}
+
+.popup__link a {
+    color: #2A18FF;
+    display: inline;
+}
+
+.likemen {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 150px;
+    height: 150px;
+}
+
+.close_icon {
+    fill: #CCCCCC;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.close_icon:hover {
+    fill: #171717;
+}
 /* POPUP END */
 
 
